@@ -19,64 +19,23 @@
             --info: #3498db;
         }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
-        
-        .header { 
-            background: var(--primary); 
-            color: white; 
-            padding: 20px; 
-            border-radius: 12px; 
-            text-align: center; 
-            margin-bottom: 25px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
-        }
-
+        .header { background: var(--primary); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 25px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 22px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); border-top: 6px solid var(--accent); }
         
-        .card { 
-            background: white; 
-            padding: 22px; 
-            border-radius: 15px; 
-            box-shadow: 0 6px 12px rgba(0,0,0,0.08); 
-            border-top: 6px solid var(--accent); 
-            transition: transform 0.3s; 
-        }
-        .card:hover { transform: translateY(-5px); }
+        /* Estilos de Redes Sociales */
+        .social-feed { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .social-post { display: flex; gap: 10px; padding: 10px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; font-size: 0.85em; }
+        .social-img { width: 60px; height: 60px; background: #ddd; border-radius: 5px; object-fit: cover; }
+        .sentiment-tag { font-size: 0.75em; padding: 2px 6px; border-radius: 4px; color: white; }
 
-        /* Estilos del Mapa */
-        #map { 
-            height: 350px; 
-            border-radius: 12px; 
-            margin: 15px 0; 
-            border: 1px solid #ddd;
-            z-index: 1;
-        }
-
+        #map { height: 300px; border-radius: 12px; margin: 15px 0; z-index: 1; }
         .kpi { font-size: 2.5em; font-weight: bold; color: var(--primary); margin: 10px 0; }
         .label { color: #7f8c8d; text-transform: uppercase; font-size: 0.85em; font-weight: 600; letter-spacing: 1px; }
-        
-        /* Barra de Afluencia estilo Google Maps */
         .progress-container { background: #eee; height: 24px; border-radius: 12px; margin: 15px 0; overflow: hidden; }
         .progress-bar { height: 100%; border-radius: 12px; transition: width 1.5s ease-in-out; background: var(--warning); width: 0; }
-        
-        .ai-insight { 
-            background: #eef7ff; 
-            border-left: 4px solid var(--info); 
-            padding: 12px; 
-            margin-top: 15px; 
-            font-style: italic; 
-            font-size: 0.95em; 
-            border-radius: 0 8px 8px 0; 
-        }
-
-        .badge { 
-            display: inline-block; 
-            padding: 5px 12px; 
-            border-radius: 20px; 
-            font-size: 0.8em; 
-            font-weight: bold; 
-            margin-bottom: 10px; 
-        }
-        .badge-live { background: #ffebee; color: var(--danger); border: 1px solid var(--danger); }
+        .ai-insight { background: #eef7ff; border-left: 4px solid var(--info); padding: 12px; margin-top: 15px; font-style: italic; font-size: 0.95em; }
+        .badge-live { background: #ffebee; color: var(--danger); border: 1px solid var(--danger); padding: 5px 12px; border-radius: 20px; font-size: 0.8em; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -88,40 +47,54 @@
 
 <div class="grid">
     <div class="card" style="grid-column: 1 / -1;">
-        <span class="badge badge-live">● TELEMETRÍA IOT (EN VIVO)</span>
-        <div class="label">Mapa de Calor: Distribución de Carga en Zona Arqueológica</div>
+        <span class="badge-live">● TELEMETRÍA IOT (EN VIVO)</span>
+        <div class="label">Distribución de Carga en Zona Arqueológica</div>
         <div id="map"></div>
         <div class="ai-insight">
-            <strong>Análisis del Observatorio:</strong> Alta concentración en "Casa de las Guacamayas"[cite: 5, 17]. El sistema sugiere redirigir el flujo al Museo de las Culturas del Norte para proteger las estructuras de tierra[cite: 6, 20].
+            <strong>Análisis del Observatorio:</strong> Alta concentración en "Casa de las Guacamayas"[cite: 6].
         </div>
     </div>
 
     <div class="card">
-        <div class="label">Flujo de Visitantes (Sensores LiDAR)</div>
-        <div class="progress-container">
-            <div id="bar-afluencia" class="progress-bar"></div>
+        <div class="label">Monitoreo de RRSS (Sentiment Analysis)</div>
+        <div class="social-feed">
+            <div class="social-post">
+                <div style="background: #e1306c; width: 4px;"></div>
+                <div>
+                    <strong>@TuristaExplora</strong> <span class="sentiment-tag" style="background:var(--success)">Positivo</span>
+                    <p>"Increíble arquitectura en Paquimé, pero hace mucho calor ☀️"</p>
+                    <small>Hace 5 min • Instagram Check-in</small>
+                </div>
+            </div>
+            <div class="social-post">
+                <div style="background: #1877f2; width: 4px;"></div>
+                <div>
+                    <strong>Juan Pérez</strong> <span class="sentiment-tag" style="background:var(--warning)">Neutral</span>
+                    <p>"Falta señalización en el sendero norte."</p>
+                    <small>Hace 15 min • Facebook Post</small>
+                </div>
+            </div>
         </div>
+        <div class="ai-insight">
+            <strong>IA Insight:</strong> Palabra clave "Calor" detectada 15 veces hoy. Alerta automática enviada para activar puntos de hidratación.
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="label">Flujo de Visitantes (LiDAR)</div>
+        <div class="progress-container"><div id="bar-afluencia" class="progress-bar"></div></div>
         <div id="txt-afluencia" style="text-align: right; font-weight: bold; font-size: 0.9em;">Analizando...</div>
         <div class="ai-insight">
-            <strong>IA Predictiva:</strong> Basado en el clima y búsquedas de Google, se espera un aumento del 40% el próximo sábado.
+            <strong>IA Predictiva:</strong> Aumento del 40% esperado p/ Sábado[cite: 23].
         </div>
     </div>
 
     <div class="card">
-        <div class="label">Índice de Preservación Digital (IoT)</div>
-        <div class="kpi" style="color: var(--danger);">¡ALERTA!</div>
-        <div class="label">Humedad en Estructura: 85%</div>
+        <div class="label">Índice de Preservación Digital</div>
+        <div class="kpi" style="color: var(--danger);">85% HR</div>
+        <div class="label">Humedad Crítica en Adobe</div>
         <div class="ai-insight">
-            <strong>Protocolo Automático:</strong> Alerta de degradación de adobe detectada por sensores de humedad. Acceso restringido temporalmente en zonas críticas[cite: 6].
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="label">Servicios Públicos (Vista Alcalde)</div>
-        <div class="kpi">92%</div>
-        <div class="label">Aceptación Social (Sentiment Analysis)</div>
-        <div class="ai-insight">
-            <strong>Minería de Datos:</strong> Análisis de hashtags #Paquimé revela satisfacción alta en seguridad[cite: 10, 13]. Sin reportes de falta de iluminación[cite: 26].
+            <strong>Alerta:</strong> Sensores detectan riesgo de erosión por humedad[cite: 19].
         </div>
     </div>
 
@@ -130,49 +103,24 @@
         <div class="kpi">$1.2M</div>
         <div class="label">Ventas Estimadas (Mata Ortiz)</div>
         <div class="ai-insight">
-            <strong>Impacto:</strong> El 30% de los visitantes de Paquimé genera consumo directo en la comunidad de artesanos local.
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="label">Tu Huella (Vista Turista)</div>
-        <div class="kpi">1.2m²</div>
-        <div class="label">Adobe Restaurado con tu Visita</div>
-        <div class="ai-insight">
-            <strong>Transparencia:</strong> Tu acceso financia directamente el mantenimiento preventivo del sitio arqueológico.
+            <strong>Dato:</strong> Correlación directa con el flujo turístico de Paquimé[cite: 21].
         </div>
     </div>
 </div>
 
 <script>
-    // 1. Configuración del Mapa Interactivo (Paquimé)
     var map = L.map('map').setView([30.3658, -107.9472], 17);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap'
-    }).addTo(map);
-
-    // Círculos de simulación de calor (Datos de LiDAR/Beacons) [cite: 6, 7]
-    L.circle([30.3660, -107.9475], {color: 'red', fillColor: '#f03', fillOpacity: 0.5, radius: 25}).addTo(map)
-        .bindPopup("<b>Sector Crítico</b><br>Saturación detectada.");
-    L.circle([30.3658, -107.9472], {color: 'orange', fillColor: '#ff9800', fillOpacity: 0.5, radius: 30}).addTo(map)
-        .bindPopup("Afluencia Moderada");
-
-    // 2. Animación de la Barra de Afluencia
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    L.circle([30.3660, -107.9475], {color: 'red', fillColor: '#f03', fillOpacity: 0.5, radius: 25}).addTo(map);
+    
     window.onload = function() {
-        const p_afluencia = 68; // Simulación de flujo actual [cite: 6]
+        const p = 68;
         const bar = document.getElementById('bar-afluencia');
-        const txt = document.getElementById('txt-afluencia');
-        
-        setTimeout(() => {
-            bar.style.width = p_afluencia + '%';
-            txt.innerText = p_afluencia + '% de capacidad ocupada';
-            
-            // Lógica de colores según saturación
-            if(p_afluencia > 80) bar.style.background = '#e74c3c';
-            else if(p_afluencia < 45) bar.style.background = '#27ae60';
+        setTimeout(() => { 
+            bar.style.width = p + '%'; 
+            document.getElementById('txt-afluencia').innerText = p + '% de capacidad';
         }, 600);
     };
 </script>
-
 </body>
 </html>
