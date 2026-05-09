@@ -23,7 +23,7 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
         .card { background: white; padding: 22px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); border-top: 6px solid var(--accent); transition: transform 0.3s; }
         .card:hover { transform: translateY(-5px); }
-        #map { height: 350px; border-radius: 12px; margin: 15px 0; border: 1px solid #ddd; z-index: 1; }
+        #map { height: 175px; border-radius: 12px; margin: 15px 0; border: 1px solid #ddd; z-index: 1; }
         .kpi { font-size: 2.5em; font-weight: bold; color: var(--primary); margin: 10px 0; }
         .label { color: #7f8c8d; text-transform: uppercase; font-size: 0.85em; font-weight: 600; letter-spacing: 1px; }
         .progress-container { background: #eee; height: 24px; border-radius: 12px; margin: 15px 0; overflow: hidden; }
@@ -79,6 +79,16 @@
     </div>
 
     <div class="card">
+        <div class="label">Tu Impacto (Vista Ciudadano)</div>
+        <div class="kpi">1.2m²</div>
+        <div class="label">Adobe restaurado gracias a ti</div>
+        <div class="ai-insight">
+            <strong>Transparencia:</strong> Tu visita financia la conservación del Patrimonio Mundial. [cite: 28]
+        </div>
+    </div>
+</div>
+
+    <div class="card">
         <div class="label">Índice de Preservación Digital</div>
         <div class="kpi" style="color: var(--danger);">¡ALERTA!</div>
         <div class="label">Humedad Crítica: 85%</div>
@@ -96,6 +106,24 @@
         </div>
     </div>
 </div>
+
+    <div class="card">
+        <div class="label">Gestión Urbana (Vista Alcalde)</div>
+        <div class="kpi">92%</div>
+        <div class="label">Satisfacción en Servicios Públicos</div>
+        <div class="ai-insight">
+            <strong>Análisis de RRSS:</strong> 0 quejas por iluminación en las últimas 24h. [cite: 26]
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="label">Previsión (Vista Hotelero)</div>
+        <div class="kpi">+40%</div>
+        <div class="label">Demanda estimada p/ Sábado</div>
+        <div class="ai-insight">
+            <strong>IA Predictiva:</strong> Basado en búsquedas de Google y clima. Se recomienda activar staff extra. 
+        </div>
+    </div>
 
 <script>
     // Configuración del Mapa
