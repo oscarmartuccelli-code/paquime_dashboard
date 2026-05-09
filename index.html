@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paquimé Intelligence Hub - Observatorio Turístico</title>
+    <title>Paquimé Intelligence Hub - Observatorio 4.0</title>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -19,100 +19,92 @@
             --info: #3498db;
         }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
-        .header { background: var(--primary); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 25px; }
+        .header { background: var(--primary); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 22px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); border-top: 6px solid var(--accent); }
-        
-        /* Estilos de Redes Sociales */
-        .social-feed { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-        .social-post { display: flex; gap: 10px; padding: 10px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; font-size: 0.85em; }
-        .social-img { width: 60px; height: 60px; background: #ddd; border-radius: 5px; object-fit: cover; }
-        .sentiment-tag { font-size: 0.75em; padding: 2px 6px; border-radius: 4px; color: white; }
-
-        #map { height: 300px; border-radius: 12px; margin: 15px 0; z-index: 1; }
+        .card { background: white; padding: 22px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); border-top: 6px solid var(--accent); transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        #map { height: 350px; border-radius: 12px; margin: 15px 0; border: 1px solid #ddd; z-index: 1; }
         .kpi { font-size: 2.5em; font-weight: bold; color: var(--primary); margin: 10px 0; }
         .label { color: #7f8c8d; text-transform: uppercase; font-size: 0.85em; font-weight: 600; letter-spacing: 1px; }
         .progress-container { background: #eee; height: 24px; border-radius: 12px; margin: 15px 0; overflow: hidden; }
         .progress-bar { height: 100%; border-radius: 12px; transition: width 1.5s ease-in-out; background: var(--warning); width: 0; }
-        .ai-insight { background: #eef7ff; border-left: 4px solid var(--info); padding: 12px; margin-top: 15px; font-style: italic; font-size: 0.95em; }
-        .badge-live { background: #ffebee; color: var(--danger); border: 1px solid var(--danger); padding: 5px 12px; border-radius: 20px; font-size: 0.8em; font-weight: bold; }
+        .ai-insight { background: #eef7ff; border-left: 4px solid var(--info); padding: 12px; margin-top: 15px; font-style: italic; font-size: 0.95em; border-radius: 0 8px 8px 0; }
+        .badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.8em; font-weight: bold; margin-bottom: 10px; }
+        .badge-live { background: #ffebee; color: var(--danger); border: 1px solid var(--danger); }
+        .social-post { display: flex; gap: 10px; padding: 10px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; font-size: 0.85em; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div class="header">
     <h1>Paquimé Intelligence Hub</h1>
-    <p>Observatorio de Turismo 4.0 - Gestión de Destino y Patrimonio</p>
+    <p>Observatorio de Turismo 4.0 - Punto 5 & 6</p>
 </div>
 
 <div class="grid">
     <div class="card" style="grid-column: 1 / -1;">
-        <span class="badge-live">● TELEMETRÍA IOT (EN VIVO)</span>
+        <span class="badge badge-live">● TELEMETRÍA IOT (EN VIVO)</span>
         <div class="label">Distribución de Carga en Zona Arqueológica</div>
         <div id="map"></div>
         <div class="ai-insight">
-            <strong>Análisis del Observatorio:</strong> Alta concentración en "Casa de las Guacamayas"[cite: 6].
+            <strong>Análisis del Observatorio:</strong> Concentración alta en "Casa de las Guacamayas". El sistema sugiere redirigir flujos para evitar la degradación de las estructuras. [cite: 6, 20]
         </div>
     </div>
 
     <div class="card">
-        <div class="label">Monitoreo de RRSS (Sentiment Analysis)</div>
-        <div class="social-feed">
-            <div class="social-post">
-                <div style="background: #e1306c; width: 4px;"></div>
-                <div>
-                    <strong>@TuristaExplora</strong> <span class="sentiment-tag" style="background:var(--success)">Positivo</span>
-                    <p>"Increíble arquitectura en Paquimé, pero hace mucho calor ☀️"</p>
-                    <small>Hace 5 min • Instagram Check-in</small>
-                </div>
-            </div>
-            <div class="social-post">
-                <div style="background: #1877f2; width: 4px;"></div>
-                <div>
-                    <strong>Juan Pérez</strong> <span class="sentiment-tag" style="background:var(--warning)">Neutral</span>
-                    <p>"Falta señalización en el sendero norte."</p>
-                    <small>Hace 15 min • Facebook Post</small>
-                </div>
+        <div class="label">Contenido Generado por Usuario (UGC)</div>
+        <div style="margin-top: 15px; text-align: center;">
+            <span class="badge" style="background:var(--info); color:white;">#PAQUIMÉ #CULTURA #LIFESTYLE (INSTAGRAM)</span>
+            <img src="atardecer-paquime.png" alt="Atardecer en Paquimé" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; border: 2px solid var(--accent);">
+            <p style="font-size: 0.85em; color: #7f8c8d; font-style: italic; margin-top: 5px;">"Analizada por Visión Computacional: Hace 2 min"</p>
+        </div>
+        <div class="social-post">
+            <div>
+                <strong>Sentiment Analysis:</strong> <span style="color:var(--success)">Positivo (92%)</span>
+                <p>"La puesta de sol en las ruinas es mágica. #Paquime #Chihuahua"</p>
             </div>
         </div>
         <div class="ai-insight">
-            <strong>IA Insight:</strong> Palabra clave "Calor" detectada 15 veces hoy. Alerta automática enviada para activar puntos de hidratación.
+            <strong>IA Vision:</strong> Sin daños estructurales visibles en el sector capturado. [cite: 9]
         </div>
     </div>
 
     <div class="card">
-        <div class="label">Flujo de Visitantes (LiDAR)</div>
+        <div class="label">Afluencia en Tiempo Real (LiDAR)</div>
         <div class="progress-container"><div id="bar-afluencia" class="progress-bar"></div></div>
         <div id="txt-afluencia" style="text-align: right; font-weight: bold; font-size: 0.9em;">Analizando...</div>
         <div class="ai-insight">
-            <strong>IA Predictiva:</strong> Aumento del 40% esperado p/ Sábado[cite: 23].
+            <strong>IA Predictiva:</strong> Aumento del 40% esperado p/ Sábado. [cite: 23]
         </div>
     </div>
 
     <div class="card">
         <div class="label">Índice de Preservación Digital</div>
-        <div class="kpi" style="color: var(--danger);">85% HR</div>
-        <div class="label">Humedad Crítica en Adobe</div>
+        <div class="kpi" style="color: var(--danger);">¡ALERTA!</div>
+        <div class="label">Humedad Crítica: 85%</div>
         <div class="ai-insight">
-            <strong>Alerta:</strong> Sensores detectan riesgo de erosión por humedad[cite: 19].
+            <strong>Protocolo:</strong> Sensores detectan riesgo de erosión. Acceso restringido en zonas de adobe reblandecido. [cite: 14, 19]
         </div>
     </div>
 
     <div class="card">
         <div class="label">Impacto Económico Regional</div>
         <div class="kpi">$1.2M</div>
-        <div class="label">Ventas Estimadas (Mata Ortiz)</div>
+        <div class="label">Ventas Mata Ortiz (Semanal)</div>
         <div class="ai-insight">
-            <strong>Dato:</strong> Correlación directa con el flujo turístico de Paquimé[cite: 21].
+            <strong>Dato:</strong> Correlación directa entre flujo turístico y ventas artesanales. [cite: 21]
         </div>
     </div>
 </div>
 
 <script>
+    // Configuración del Mapa
     var map = L.map('map').setView([30.3658, -107.9472], 17);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-    L.circle([30.3660, -107.9475], {color: 'red', fillColor: '#f03', fillOpacity: 0.5, radius: 25}).addTo(map);
-    
+    L.circle([30.3660, -107.9475], {color: 'red', fillColor: '#f03', fillOpacity: 0.5, radius: 25}).addTo(map)
+        .bindPopup("<b>Sector Saturado</b><br>Redirigiendo turistas.");
+
+    // Animación de Afluencia
     window.onload = function() {
         const p = 68;
         const bar = document.getElementById('bar-afluencia');
