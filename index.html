@@ -20,18 +20,43 @@
         }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
         .header { background: var(--primary); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; align-items: start; }
-        .card { background: white; padding: 22px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); border-top: 6px solid var(--accent); transition: transform 0.3s; }
+        
+        /* Ajuste para que las tarjetas no se estiren */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 20px; 
+            align-items: start !important; 
+        }
+        
+        .card { 
+            background: white; 
+            padding: 22px; 
+            border-radius: 15px; 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08); 
+            border-top: 6px solid var(--accent); 
+            transition: transform 0.3s;
+            height: auto !important; /* Evita estiramiento vertical */
+        }
         .card:hover { transform: translateY(-5px); }
-        #map { height: 175px; border-radius: 12px; margin: 15px 0; border: 1px solid #ddd; z-index: 1; }
-        .kpi { font-size: 2.5em; font-weight: bold; color: var(--primary); margin: 10px 0; }
-        .label { color: #7f8c8d; text-transform: uppercase; font-size: 0.85em; font-weight: 600; letter-spacing: 1px; }
-        .progress-container { background: #eee; height: 24px; border-radius: 12px; margin: 15px 0; overflow: hidden; }
+
+        /* Mapa corto forzado */
+        #map { 
+            height: 160px !important; 
+            border-radius: 12px; 
+            margin: 15px 0; 
+            border: 1px solid #ddd; 
+            z-index: 1; 
+        }
+
+        .kpi { font-size: 2.3em; font-weight: bold; color: var(--primary); margin: 5px 0; }
+        .label { color: #7f8c8d; text-transform: uppercase; font-size: 0.8em; font-weight: 600; letter-spacing: 1px; }
+        .progress-container { background: #eee; height: 20px; border-radius: 12px; margin: 10px 0; overflow: hidden; }
         .progress-bar { height: 100%; border-radius: 12px; transition: width 1.5s ease-in-out; background: var(--warning); width: 0; }
-        .ai-insight { background: #eef7ff; border-left: 4px solid var(--info); padding: 12px; margin-top: 15px; font-style: italic; font-size: 0.95em; border-radius: 0 8px 8px 0; }
-        .badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.8em; font-weight: bold; margin-bottom: 10px; }
+        .ai-insight { background: #eef7ff; border-left: 4px solid var(--info); padding: 10px; margin-top: 10px; font-style: italic; font-size: 0.9em; border-radius: 0 8px 8px 0; }
+        .badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.75em; font-weight: bold; margin-bottom: 10px; }
         .badge-live { background: #ffebee; color: var(--danger); border: 1px solid var(--danger); }
-        .social-post { display: flex; gap: 10px; padding: 10px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; font-size: 0.85em; margin-top: 10px; }
+        .social-post { display: flex; gap: 10px; padding: 10px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; font-size: 0.8em; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -47,53 +72,48 @@
         <div class="label">Distribución de Carga en Zona Arqueológica</div>
         <div id="map"></div>
         <div class="ai-insight">
-            <strong>Análisis del Observatorio:</strong> Concentración alta en "Casa de las Guacamayas". El sistema sugiere redirigir flujos para evitar la degradación de las estructuras. [cite: 6, 20]
+            <strong>Análisis del Observatorio:</strong> Concentración alta en "Casa de las Guacamayas". Redirigiendo flujos. [cite: 6, 20]
         </div>
     </div>
 
     <div class="card">
         <div class="label">Contenido Generado por Usuario (UGC)</div>
         <div style="margin-top: 15px; text-align: center;">
-            <span class="badge" style="background:var(--info); color:white;">#PAQUIMÉ #CULTURA #LIFESTYLE (INSTAGRAM)</span>
-            <img src="atardecer-paquime.png" alt="Atardecer en Paquimé" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; border: 2px solid var(--accent);">
-            <p style="font-size: 0.85em; color: #7f8c8d; font-style: italic; margin-top: 5px;">"Analizada por Visión Computacional: Hace 2 min"</p>
+            <img src="atardecer-paquime.png" alt="Atardecer" style="width: 100%; height: 160px; object-fit: cover; border-radius: 10px; border: 2px solid var(--accent);">
         </div>
         <div class="social-post">
             <div>
                 <strong>Sentiment Analysis:</strong> <span style="color:var(--success)">Positivo (92%)</span>
-                <p>"La puesta de sol en las ruinas es mágica. #Paquime #Chihuahua"</p>
+                <p>"La puesta de sol en las ruinas es mágica."</p>
             </div>
         </div>
         <div class="ai-insight">
-            <strong>IA Vision:</strong> Sin daños estructurales visibles en el sector capturado. [cite: 9]
+            <strong>IA Vision:</strong> Sin daños visibles en adobe. [cite: 9]
         </div>
     </div>
 
     <div class="card">
-        <div class="label">Afluencia en Tiempo Real (LiDAR)</div>
+        <div class="label">Afluencia (LiDAR)</div>
         <div class="progress-container"><div id="bar-afluencia" class="progress-bar"></div></div>
-        <div id="txt-afluencia" style="text-align: right; font-weight: bold; font-size: 0.9em;">Analizando...</div>
+        <div id="txt-afluencia" style="text-align: right; font-weight: bold; font-size: 0.85em;">...</div>
         <div class="ai-insight">
-            <strong>IA Predictiva:</strong> Aumento del 40% esperado p/ Sábado. [cite: 23]
+            <strong>IA Predictiva:</strong> +40% esperado p/ Sábado. [cite: 23]
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="label">Índice de Preservación Digital</div>
+        <div class="kpi" style="color: var(--danger);">85% HR</div>
+        <div class="ai-insight">
+            <strong>Protocolo:</strong> Riesgo de erosión. Acceso restringido. [cite: 14, 19]
         </div>
     </div>
 
     <div class="card">
         <div class="label">Tu Impacto (Vista Ciudadano)</div>
         <div class="kpi">1.2m²</div>
-        <div class="label">Adobe restaurado gracias a ti</div>
         <div class="ai-insight">
-            <strong>Transparencia:</strong> Tu visita financia la conservación del Patrimonio Mundial. [cite: 28]
-        </div>
-    </div>
-</div>
-
-    <div class="card">
-        <div class="label">Índice de Preservación Digital</div>
-        <div class="kpi" style="color: var(--danger);">¡ALERTA!</div>
-        <div class="label">Humedad Crítica: 85%</div>
-        <div class="ai-insight">
-            <strong>Protocolo:</strong> Sensores detectan riesgo de erosión. Acceso restringido en zonas de adobe reblandecido. [cite: 14, 19]
+            <strong>Transparencia:</strong> Financiando conservación. [cite: 28]
         </div>
     </div>
 
@@ -102,43 +122,38 @@
         <div class="kpi">$1.2M</div>
         <div class="label">Ventas Mata Ortiz (Semanal)</div>
         <div class="ai-insight">
-            <strong>Dato:</strong> Correlación directa entre flujo turístico y ventas artesanales. [cite: 21]
+            <strong>Dato:</strong> Correlación con flujo turístico. [cite: 21]
         </div>
     </div>
-</div>
 
     <div class="card">
         <div class="label">Gestión Urbana (Vista Alcalde)</div>
         <div class="kpi">92%</div>
-        <div class="label">Satisfacción en Servicios Públicos</div>
         <div class="ai-insight">
-            <strong>Análisis de RRSS:</strong> 0 quejas por iluminación en las últimas 24h. [cite: 26]
+            <strong>Análisis:</strong> Sin quejas de iluminación. [cite: 26]
         </div>
     </div>
 
     <div class="card">
         <div class="label">Previsión (Vista Hotelero)</div>
         <div class="kpi">+40%</div>
-        <div class="label">Demanda estimada p/ Sábado</div>
         <div class="ai-insight">
-            <strong>IA Predictiva:</strong> Basado en búsquedas de Google y clima. Se recomienda activar staff extra. 
+            <strong>Predictivo:</strong> Activar staff extra según búsquedas. [cite: 27]
         </div>
     </div>
+</div>
 
 <script>
-    // Configuración del Mapa
-    var map = L.map('map').setView([30.3658, -107.9472], 17);
+    var map = L.map('map', {zoomControl: false}).setView([30.3658, -107.9472], 17);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-    L.circle([30.3660, -107.9475], {color: 'red', fillColor: '#f03', fillOpacity: 0.5, radius: 25}).addTo(map)
-        .bindPopup("<b>Sector Saturado</b><br>Redirigiendo turistas.");
+    L.circle([30.3660, -107.9475], {color: 'red', fillColor: '#f03', fillOpacity: 0.5, radius: 25}).addTo(map);
 
-    // Animación de Afluencia
     window.onload = function() {
         const p = 68;
         const bar = document.getElementById('bar-afluencia');
         setTimeout(() => { 
             bar.style.width = p + '%'; 
-            document.getElementById('txt-afluencia').innerText = p + '% de capacidad';
+            document.getElementById('txt-afluencia').innerText = p + '% capacidad';
         }, 600);
     };
 </script>
