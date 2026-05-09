@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paquimé Intelligence Hub - Dashboard</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #d4a373;
+            --bg: #f4f7f6;
+            --success: #27ae60;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
+        .header { background: var(--primary); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 22px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); border-top: 6px solid var(--accent); transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .kpi { font-size: 2.5em; font-weight: bold; color: var(--primary); margin: 10px 0; }
+        .label { color: #7f8c8d; text-transform: uppercase; font-size: 0.85em; font-weight: 600; letter-spacing: 1px; }
+        
+        /* Estilo Google Maps Afluencia */
+        .progress-container { background: #eee; height: 24px; border-radius: 12px; margin: 15px 0; overflow: hidden; position: relative; }
+        .progress-bar { height: 100%; border-radius: 12px; transition: width 1.5s ease-in-out; background: var(--warning); width: 0; }
+        
+        .ai-insight { background: #eef7ff; border-left: 4px solid #3498db; padding: 12px; margin-top: 15px; font-style: italic; font-size: 0.95em; border-radius: 0 8px 8px 0; }
+        .badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.8em; font-weight: bold; margin-bottom: 10px; }
+        .badge-live { background: #ffebee; color: var(--danger); border: 1px solid var(--danger); }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Paquimé Intelligence Hub</h1>
+    <p>Turismo 4.0: Gestión de Destino en Tiempo Real</p>
+</div>
+
+<div class="grid">
+    <div class="card">
+        <span class="badge badge-live">● EN VIVO (IoT)</span>
+        <div class="label">Afluencia Actual: Zona Arqueológica</div>
+        <div class="progress-container">
+            <div id="bar-afluencia" class="progress-bar"></div>
+        </div>
+        <div id="txt-afluencia" style="text-align: right; font-weight: bold;">Cargando...</div>
+        <div class="ai-insight">
+            <strong>IA Sugiere:</strong> Nivel moderado. Ideal para visitar la "Casa de los Hornos". [cite: 14]
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="label">Gestión Urbana (Vista Alcalde)</div>
+        <div class="kpi">92%</div>
+        <div class="label">Satisfacción en Servicios Públicos</div>
+        <div class="ai-insight">
+            <strong>Análisis de RRSS:</strong> 0 quejas por iluminación en las últimas 24h. [cite: 26]
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="label">Previsión (Vista Hotelero)</div>
+        <div class="kpi">+40%</div>
+        <div class="label">Demanda estimada p/ Sábado</div>
+        <div class="ai-insight">
+            <strong>IA Predictiva:</strong> Basado en búsquedas de Google y clima. Se recomienda activar staff extra. 
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="label">Tu Impacto (Vista Ciudadano)</div>
+        <div class="kpi">1.2m²</div>
+        <div class="label">Adobe restaurado gracias a ti</div>
+        <div class="ai-insight">
+            <strong>Transparencia:</strong> Tu visita financia la conservación del Patrimonio Mundial. [cite: 28]
+        </div>
+    </div>
+</div>
+
+<script>
+    // Animación para simular datos reales de IoT
+    window.onload = function() {
+        const afluencia = 65; // Dato que vendría del sensor LiDAR [cite: 6]
+        document.getElementById('bar-afluencia').style.width = afluencia + '%';
+        document.getElementById('txt-afluencia').innerText = afluencia + '% de capacidad';
+        
+        // Cambiar color según afluencia estilo Maps
+        if(afluencia > 75) document.getElementById('bar-afluencia').style.background = '#e74c3c';
+        else if(afluencia < 40) document.getElementById('bar-afluencia').style.background = '#27ae60';
+    };
+</script>
+
+</body>
+</html>
