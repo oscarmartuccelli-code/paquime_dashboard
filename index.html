@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paquimé Intelligence Hub - Dashboard Final</title>
+    <title>Paquimé Intelligence Hub - Observatorio 4.0</title>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -14,58 +14,108 @@
             --primary: #2c3e50;
             --accent: #d4a373;
             --bg: #f4f7f6;
-            --info: #3498db;
+            --success: #27ae60;
+            --warning: #f1c40f;
             --danger: #e74c3c;
+            --info: #3498db;
         }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
-        .header { background: var(--primary); color: white; padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; align-items: start !important; }
-        .card { background: white; padding: 18px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); border-top: 5px solid var(--accent); height: auto !important; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
+        .header { background: var(--primary); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         
-        #map { height: 160px !important; border-radius: 10px; margin: 10px 0; border: 1px solid #ddd; z-index: 1; }
-        canvas { max-height: 150px !important; width: 100% !important; } /* Tamaño controlado de gráficas */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 20px; 
+            align-items: start !important; 
+        }
+        
+        .card { 
+            background: white; 
+            padding: 22px; 
+            border-radius: 15px; 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08); 
+            border-top: 6px solid var(--accent); 
+            transition: transform 0.3s;
+            height: auto !important;
+        }
+        .card:hover { transform: translateY(-5px); }
 
-        .label { color: #7f8c8d; text-transform: uppercase; font-size: 0.75em; font-weight: 700; letter-spacing: 1px; }
-        .kpi { font-size: 2em; font-weight: bold; color: var(--primary); }
-        .ai-insight { background: #eef7ff; border-left: 3px solid var(--info); padding: 8px; margin-top: 10px; font-style: italic; font-size: 0.85em; }
-        .badge-live { background: #ffebee; color: var(--danger); border: 1px solid var(--danger); padding: 3px 8px; border-radius: 15px; font-size: 0.7em; font-weight: bold; }
+        #map { 
+            height: 160px !important; 
+            border-radius: 12px; 
+            margin: 15px 0; 
+            border: 1px solid #ddd; 
+            z-index: 1; 
+        }
+
+        /* Ajuste para que las gráficas no se desborden */
+        canvas { max-height: 150px !important; width: 100% !important; margin: 10px 0; }
+
+        .kpi { font-size: 2.3em; font-weight: bold; color: var(--primary); margin: 5px 0; }
+        .label { color: #7f8c8d; text-transform: uppercase; font-size: 0.8em; font-weight: 600; letter-spacing: 1px; }
+        .progress-container { background: #eee; height: 20px; border-radius: 12px; margin: 10px 0; overflow: hidden; }
+        .progress-bar { height: 100%; border-radius: 12px; transition: width 1.5s ease-in-out; background: var(--warning); width: 0; }
+        .ai-insight { background: #eef7ff; border-left: 4px solid var(--info); padding: 10px; margin-top: 10px; font-style: italic; font-size: 0.9em; border-radius: 0 8px 8px 0; }
+        .badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.75em; font-weight: bold; margin-bottom: 10px; }
+        .badge-live { background: #ffebee; color: var(--danger); border: 1px solid var(--danger); }
+        .social-post { display: flex; gap: 10px; padding: 10px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; font-size: 0.8em; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div class="header">
     <h1>Paquimé Intelligence Hub</h1>
-    <p>Observatorio 4.0 - Monitoreo y Predicción</p>
+    <p>Observatorio de Turismo 4.0 - Punto 5 & 6</p>
 </div>
 
 <div class="grid">
     <div class="card" style="grid-column: 1 / -1;">
-        <span class="badge-live">● TELEMETRÍA IOT</span>
-        <div class="label">Distribución de Flujo (LiDAR)</div>
+        <span class="badge badge-live">● TELEMETRÍA IOT (EN VIVO)</span>
+        <div class="label">Distribución de Carga en Zona Arqueológica</div>
         <div id="map"></div>
+        <div class="ai-insight">
+            <strong>Análisis del Observatorio:</strong> Concentración alta en "Casa de las Guacamayas". Redirigiendo flujos. [cite: 6, 20]
+        </div>
     </div>
 
     <div class="card">
         <div class="label">Predicción de Afluencia Semanal</div>
         <canvas id="chartAfluencia"></canvas>
         <div class="ai-insight">
-            <strong>IA Predictiva:</strong> Pico de visitas detectado para el Sábado (+40%).
+            <strong>IA Predictiva:</strong> Aumento del 40% esperado para el Sábado. [cite: 23, 27]
         </div>
     </div>
 
     <div class="card">
-        <div class="label">Análisis de Sentimiento (RRSS)</div>
+        <div class="label">Distribución de Sentimiento (RRSS)</div>
         <canvas id="chartSentimiento"></canvas>
         <div class="ai-insight">
-            <strong>Minería de Datos:</strong> Opiniones positivas dominantes en Instagram.
+            <strong>Análisis:</strong> 92% de comentarios positivos en las últimas 24h. [cite: 13, 26]
         </div>
     </div>
 
     <div class="card">
-        <div class="label">Impacto Económico Regional</div>
-        <div class="kpi">$1.2M MXN</div>
+        <div class="label">Contenido Generado por Usuario (UGC)</div>
+        <div style="margin-top: 15px; text-align: center;">
+            <img src="atardecer-paquime.png" alt="Atardecer" style="width: 100%; height: 160px; object-fit: cover; border-radius: 10px; border: 2px solid var(--accent);">
+        </div>
+        <div class="social-post">
+            <div>
+                <strong>Sentiment Analysis:</strong> <span style="color:var(--success)">Positivo (92%)</span>
+                <p>"La puesta de sol en las ruinas es mágica."</p>
+            </div>
+        </div>
         <div class="ai-insight">
-            <strong>Dato:</strong> Correlación directa con ventas en Mata Ortiz.
+            <strong>IA Vision:</strong> Sin daños visibles en adobe. [cite: 9, 11]
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="label">Afluencia Actual (LiDAR)</div>
+        <div class="progress-container"><div id="bar-afluencia" class="progress-bar"></div></div>
+        <div id="txt-afluencia" style="text-align: right; font-weight: bold; font-size: 0.85em;">...</div>
+        <div class="ai-insight">
+            <strong>Estado:</strong> Flujo controlado por sistema inteligente. [cite: 17]
         </div>
     </div>
 
@@ -73,16 +123,33 @@
         <div class="label">Índice de Preservación Digital</div>
         <div class="kpi" style="color: var(--danger);">85% HR</div>
         <div class="ai-insight">
-            <strong>Alerta IoT:</strong> Riesgo de erosión por humedad. Acceso restringido.
+            <strong>Protocolo:</strong> Sensores detectan riesgo de erosión. Acceso restringido. [cite: 14, 19]
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="label">Impacto Económico Regional</div>
+        <div class="kpi">$1.2M</div>
+        <div class="label">Ventas Mata Ortiz (Semanal)</div>
+        <div class="ai-insight">
+            <strong>Dato:</strong> Correlación directa entre flujo y ventas locales. [cite: 21]
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="label">Tu Impacto (Vista Ciudadano)</div>
+        <div class="kpi">1.2m²</div>
+        <div class="ai-insight">
+            <strong>Transparencia:</strong> Tu visita financia la restauración del adobe. [cite: 28]
         </div>
     </div>
 </div>
 
 <script>
-    // 1. Mapa de Paquimé
+    // 1. Configuración del Mapa
     var map = L.map('map', {zoomControl: false}).setView([30.3658, -107.9472], 17);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-    L.circle([30.3660, -107.9475], {color: 'red', fillColor: '#f03', fillOpacity: 0.5, radius: 20}).addTo(map);
+    L.circle([30.3660, -107.9475], {color: 'red', fillColor: '#f03', fillOpacity: 0.5, radius: 25}).addTo(map);
 
     // 2. Gráfica de Afluencia (Líneas)
     new Chart(document.getElementById('chartAfluencia'), {
@@ -98,7 +165,7 @@
                 backgroundColor: 'rgba(212, 163, 115, 0.1)'
             }]
         },
-        options: { plugins: { legend: { display: false } } }
+        options: { plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false } } } }
     });
 
     // 3. Gráfica de Sentimiento (Dona)
@@ -113,6 +180,16 @@
         },
         options: { plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } }
     });
+
+    // 4. Animación de Afluencia
+    window.onload = function() {
+        const p = 68;
+        const bar = document.getElementById('bar-afluencia');
+        setTimeout(() => { 
+            bar.style.width = p + '%'; 
+            document.getElementById('txt-afluencia').innerText = p + '% capacidad';
+        }, 600);
+    };
 </script>
 </body>
 </html>
