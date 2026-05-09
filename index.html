@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paquimé Intelligence Hub - Dashboard</title>
+    <title>Paquimé Intelligence Hub - Observatorio Turístico</title>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -16,6 +16,7 @@
             --success: #27ae60;
             --warning: #f1c40f;
             --danger: #e74c3c;
+            --info: #3498db;
         }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
         
@@ -41,13 +42,13 @@
         }
         .card:hover { transform: translateY(-5px); }
 
-        /* Mapa */
+        /* Estilos del Mapa */
         #map { 
             height: 350px; 
             border-radius: 12px; 
             margin: 15px 0; 
-            z-index: 1; 
             border: 1px solid #ddd;
+            z-index: 1;
         }
 
         .kpi { font-size: 2.5em; font-weight: bold; color: var(--primary); margin: 10px 0; }
@@ -59,7 +60,7 @@
         
         .ai-insight { 
             background: #eef7ff; 
-            border-left: 4px solid #3498db; 
+            border-left: 4px solid var(--info); 
             padding: 12px; 
             margin-top: 15px; 
             font-style: italic; 
@@ -82,85 +83,94 @@
 
 <div class="header">
     <h1>Paquimé Intelligence Hub</h1>
-    <p>Turismo 4.0: Gestión de Destino en Tiempo Real</p>
+    <p>Observatorio de Turismo 4.0 - Gestión de Destino y Patrimonio</p>
 </div>
 
 <div class="grid">
     <div class="card" style="grid-column: 1 / -1;">
-        <span class="badge badge-live">● MAPA DE CALOR IOT (LIVE)</span>
-        <div class="label">Distribución de Flujo en Zona Arqueológica</div>
+        <span class="badge badge-live">● TELEMETRÍA IOT (EN VIVO)</span>
+        <div class="label">Mapa de Calor: Distribución de Carga en Zona Arqueológica</div>
         <div id="map"></div>
         <div class="ai-insight">
-            <strong>IA Predictiva:</strong> Concentración alta detectada en la "Casa de las Guacamayas". Sugiriendo rutas alternativas hacia el museo para preservar el adobe.
+            <strong>Análisis del Observatorio:</strong> Alta concentración en "Casa de las Guacamayas"[cite: 5, 17]. El sistema sugiere redirigir el flujo al Museo de las Culturas del Norte para proteger las estructuras de tierra[cite: 6, 20].
         </div>
     </div>
 
     <div class="card">
-        <div class="label">Afluencia en Tiempo Real (Sensores LiDAR)</div>
+        <div class="label">Flujo de Visitantes (Sensores LiDAR)</div>
         <div class="progress-container">
             <div id="bar-afluencia" class="progress-bar"></div>
         </div>
-        <div id="txt-afluencia" style="text-align: right; font-weight: bold; font-size: 0.9em;">Cargando...</div>
+        <div id="txt-afluencia" style="text-align: right; font-weight: bold; font-size: 0.9em;">Analizando...</div>
         <div class="ai-insight">
-            <strong>Sugerencia:</strong> Momento ideal para fotos. Flujo optimizado por IA.
+            <strong>IA Predictiva:</strong> Basado en el clima y búsquedas de Google, se espera un aumento del 40% el próximo sábado.
         </div>
     </div>
 
     <div class="card">
-        <div class="label">Gestión Urbana (Vista Alcalde)</div>
+        <div class="label">Índice de Preservación Digital (IoT)</div>
+        <div class="kpi" style="color: var(--danger);">¡ALERTA!</div>
+        <div class="label">Humedad en Estructura: 85%</div>
+        <div class="ai-insight">
+            <strong>Protocolo Automático:</strong> Alerta de degradación de adobe detectada por sensores de humedad. Acceso restringido temporalmente en zonas críticas[cite: 6].
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="label">Servicios Públicos (Vista Alcalde)</div>
         <div class="kpi">92%</div>
-        <div class="label">Eficiencia en Servicios Públicos</div>
+        <div class="label">Aceptación Social (Sentiment Analysis)</div>
         <div class="ai-insight">
-            <strong>Sentiment Analysis:</strong> Basado en minería de textos de RRSS[cite: 13]. Sin reportes de iluminación en acceso Mata Ortiz[cite: 26].
+            <strong>Minería de Datos:</strong> Análisis de hashtags #Paquimé revela satisfacción alta en seguridad[cite: 10, 13]. Sin reportes de falta de iluminación[cite: 26].
         </div>
     </div>
 
     <div class="card">
-        <div class="label">Previsión (Vista Hotelero)</div>
-        <div class="kpi">+40%</div>
-        <div class="label">Demanda estimada p/ Sábado</div>
+        <div class="label">Impacto Económico Regional</div>
+        <div class="kpi">$1.2M</div>
+        <div class="label">Ventas Estimadas (Mata Ortiz)</div>
         <div class="ai-insight">
-            <strong>IA Generativa:</strong> Basado en tendencias de búsqueda en Google[cite: 23, 27]. Se recomienda ajustar inventarios de insumos.
+            <strong>Impacto:</strong> El 30% de los visitantes de Paquimé genera consumo directo en la comunidad de artesanos local.
         </div>
     </div>
 
     <div class="card">
         <div class="label">Tu Huella (Vista Turista)</div>
         <div class="kpi">1.2m²</div>
-        <div class="label">Adobe restaurado gracias a tu visita</div>
+        <div class="label">Adobe Restaurado con tu Visita</div>
         <div class="ai-insight">
-            <strong>Transparencia:</strong> Tu acceso financia directamente el Índice de Preservación Digital[cite: 19, 28].
+            <strong>Transparencia:</strong> Tu acceso financia directamente el mantenimiento preventivo del sitio arqueológico.
         </div>
     </div>
 </div>
 
 <script>
-    // 1. Inicialización del Mapa en Paquimé
+    // 1. Configuración del Mapa Interactivo (Paquimé)
     var map = L.map('map').setView([30.3658, -107.9472], 17);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap'
     }).addTo(map);
 
-    // Simulación de puntos calientes mediante círculos de telemetría IoT
+    // Círculos de simulación de calor (Datos de LiDAR/Beacons) [cite: 6, 7]
     L.circle([30.3660, -107.9475], {color: 'red', fillColor: '#f03', fillOpacity: 0.5, radius: 25}).addTo(map)
-        .bindPopup("<b>Sector Saturado</b><br>Capacidad de carga al 90%");
+        .bindPopup("<b>Sector Crítico</b><br>Saturación detectada.");
     L.circle([30.3658, -107.9472], {color: 'orange', fillColor: '#ff9800', fillOpacity: 0.5, radius: 30}).addTo(map)
         .bindPopup("Afluencia Moderada");
 
     // 2. Animación de la Barra de Afluencia
     window.onload = function() {
-        const porc_afluencia = 65; // Simulación de dato real de sensor LiDAR
+        const p_afluencia = 68; // Simulación de flujo actual [cite: 6]
         const bar = document.getElementById('bar-afluencia');
         const txt = document.getElementById('txt-afluencia');
         
         setTimeout(() => {
-            bar.style.width = porc_afluencia + '%';
-            txt.innerText = porc_afluencia + '% de capacidad ocupada';
+            bar.style.width = p_afluencia + '%';
+            txt.innerText = p_afluencia + '% de capacidad ocupada';
             
-            // Cambio de color dinámico
-            if(porc_afluencia > 80) bar.style.background = '#e74c3c';
-            else if(porc_afluencia < 45) bar.style.background = '#27ae60';
-        }, 500);
+            // Lógica de colores según saturación
+            if(p_afluencia > 80) bar.style.background = '#e74c3c';
+            else if(p_afluencia < 45) bar.style.background = '#27ae60';
+        }, 600);
     };
 </script>
 
