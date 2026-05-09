@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paquimé Intelligence Hub - Dashboard</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <style>
         :root {
             --primary: #2c3e50;
@@ -13,20 +17,64 @@
             --warning: #f1c40f;
             --danger: #e74c3c;
         }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
-        .header { background: var(--primary); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
+        
+        .header { 
+            background: var(--primary); 
+            color: white; 
+            padding: 20px; 
+            border-radius: 12px; 
+            text-align: center; 
+            margin-bottom: 25px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+        }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 22px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); border-top: 6px solid var(--accent); transition: transform 0.3s; }
+        
+        .card { 
+            background: white; 
+            padding: 22px; 
+            border-radius: 15px; 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08); 
+            border-top: 6px solid var(--accent); 
+            transition: transform 0.3s; 
+        }
         .card:hover { transform: translateY(-5px); }
+
+        /* Mapa */
+        #map { 
+            height: 350px; 
+            border-radius: 12px; 
+            margin: 15px 0; 
+            z-index: 1; 
+            border: 1px solid #ddd;
+        }
+
         .kpi { font-size: 2.5em; font-weight: bold; color: var(--primary); margin: 10px 0; }
         .label { color: #7f8c8d; text-transform: uppercase; font-size: 0.85em; font-weight: 600; letter-spacing: 1px; }
         
-        /* Estilo Google Maps Afluencia */
-        .progress-container { background: #eee; height: 24px; border-radius: 12px; margin: 15px 0; overflow: hidden; position: relative; }
+        /* Barra de Afluencia estilo Google Maps */
+        .progress-container { background: #eee; height: 24px; border-radius: 12px; margin: 15px 0; overflow: hidden; }
         .progress-bar { height: 100%; border-radius: 12px; transition: width 1.5s ease-in-out; background: var(--warning); width: 0; }
         
-        .ai-insight { background: #eef7ff; border-left: 4px solid #3498db; padding: 12px; margin-top: 15px; font-style: italic; font-size: 0.95em; border-radius: 0 8px 8px 0; }
-        .badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 0.8em; font-weight: bold; margin-bottom: 10px; }
+        .ai-insight { 
+            background: #eef7ff; 
+            border-left: 4px solid #3498db; 
+            padding: 12px; 
+            margin-top: 15px; 
+            font-style: italic; 
+            font-size: 0.95em; 
+            border-radius: 0 8px 8px 0; 
+        }
+
+        .badge { 
+            display: inline-block; 
+            padding: 5px 12px; 
+            border-radius: 20px; 
+            font-size: 0.8em; 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+        }
         .badge-live { background: #ffebee; color: var(--danger); border: 1px solid var(--danger); }
     </style>
 </head>
@@ -38,24 +86,32 @@
 </div>
 
 <div class="grid">
+    <div class="card" style="grid-column: 1 / -1;">
+        <span class="badge badge-live">● MAPA DE CALOR IOT (LIVE)</span>
+        <div class="label">Distribución de Flujo en Zona Arqueológica</div>
+        <div id="map"></div>
+        <div class="ai-insight">
+            <strong>IA Predictiva:</strong> Concentración alta detectada en la "Casa de las Guacamayas". Sugiriendo rutas alternativas hacia el museo para preservar el adobe.
+        </div>
+    </div>
+
     <div class="card">
-        <span class="badge badge-live">● EN VIVO (IoT)</span>
-        <div class="label">Afluencia Actual: Zona Arqueológica</div>
+        <div class="label">Afluencia en Tiempo Real (Sensores LiDAR)</div>
         <div class="progress-container">
             <div id="bar-afluencia" class="progress-bar"></div>
         </div>
-        <div id="txt-afluencia" style="text-align: right; font-weight: bold;">Cargando...</div>
+        <div id="txt-afluencia" style="text-align: right; font-weight: bold; font-size: 0.9em;">Cargando...</div>
         <div class="ai-insight">
-            <strong>IA Sugiere:</strong> Nivel moderado. Ideal para visitar la "Casa de los Hornos". [cite: 14]
+            <strong>Sugerencia:</strong> Momento ideal para fotos. Flujo optimizado por IA.
         </div>
     </div>
 
     <div class="card">
         <div class="label">Gestión Urbana (Vista Alcalde)</div>
         <div class="kpi">92%</div>
-        <div class="label">Satisfacción en Servicios Públicos</div>
+        <div class="label">Eficiencia en Servicios Públicos</div>
         <div class="ai-insight">
-            <strong>Análisis de RRSS:</strong> 0 quejas por iluminación en las últimas 24h. [cite: 26]
+            <strong>Sentiment Analysis:</strong> Basado en minería de textos de RRSS[cite: 13]. Sin reportes de iluminación en acceso Mata Ortiz[cite: 26].
         </div>
     </div>
 
@@ -64,30 +120,47 @@
         <div class="kpi">+40%</div>
         <div class="label">Demanda estimada p/ Sábado</div>
         <div class="ai-insight">
-            <strong>IA Predictiva:</strong> Basado en búsquedas de Google y clima. Se recomienda activar staff extra. 
+            <strong>IA Generativa:</strong> Basado en tendencias de búsqueda en Google[cite: 23, 27]. Se recomienda ajustar inventarios de insumos.
         </div>
     </div>
 
     <div class="card">
-        <div class="label">Tu Impacto (Vista Ciudadano)</div>
+        <div class="label">Tu Huella (Vista Turista)</div>
         <div class="kpi">1.2m²</div>
-        <div class="label">Adobe restaurado gracias a ti</div>
+        <div class="label">Adobe restaurado gracias a tu visita</div>
         <div class="ai-insight">
-            <strong>Transparencia:</strong> Tu visita financia la conservación del Patrimonio Mundial. [cite: 28]
+            <strong>Transparencia:</strong> Tu acceso financia directamente el Índice de Preservación Digital[cite: 19, 28].
         </div>
     </div>
 </div>
 
 <script>
-    // Animación para simular datos reales de IoT
+    // 1. Inicialización del Mapa en Paquimé
+    var map = L.map('map').setView([30.3658, -107.9472], 17);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Simulación de puntos calientes mediante círculos de telemetría IoT
+    L.circle([30.3660, -107.9475], {color: 'red', fillColor: '#f03', fillOpacity: 0.5, radius: 25}).addTo(map)
+        .bindPopup("<b>Sector Saturado</b><br>Capacidad de carga al 90%");
+    L.circle([30.3658, -107.9472], {color: 'orange', fillColor: '#ff9800', fillOpacity: 0.5, radius: 30}).addTo(map)
+        .bindPopup("Afluencia Moderada");
+
+    // 2. Animación de la Barra de Afluencia
     window.onload = function() {
-        const afluencia = 65; // Dato que vendría del sensor LiDAR [cite: 6]
-        document.getElementById('bar-afluencia').style.width = afluencia + '%';
-        document.getElementById('txt-afluencia').innerText = afluencia + '% de capacidad';
+        const porc_afluencia = 65; // Simulación de dato real de sensor LiDAR
+        const bar = document.getElementById('bar-afluencia');
+        const txt = document.getElementById('txt-afluencia');
         
-        // Cambiar color según afluencia estilo Maps
-        if(afluencia > 75) document.getElementById('bar-afluencia').style.background = '#e74c3c';
-        else if(afluencia < 40) document.getElementById('bar-afluencia').style.background = '#27ae60';
+        setTimeout(() => {
+            bar.style.width = porc_afluencia + '%';
+            txt.innerText = porc_afluencia + '% de capacidad ocupada';
+            
+            // Cambio de color dinámico
+            if(porc_afluencia > 80) bar.style.background = '#e74c3c';
+            else if(porc_afluencia < 45) bar.style.background = '#27ae60';
+        }, 500);
     };
 </script>
 
