@@ -87,6 +87,23 @@
     </div>
 
     <div class="card">
+    <div class="label">Índice de Satisfacción del Destino (NPS)</div>
+    <canvas id="chartSatisfaccion" style="max-height: 200px !important;"></canvas>
+    
+    <div class="social-post" style="background: #fff9db; border-color: #f1c40f;">
+        <div>
+            <strong>Feedback Reciente (IA Guía):</strong>
+            <p>"La IA resolvió mis dudas en mi idioma. ¡Mucho mejor que un folleto!"</p>
+            <small>Encuesta post-visita • 9.8/10</small>
+        </div>
+    </div>
+
+    <div class="ai-insight">
+        <strong>Análisis de Sentimiento:</strong> El 88% de los usuarios califica la interacción con la IA como "Excelente". El punto de mejora detectado es la sombra en áreas de descanso.
+    </div>
+</div>
+
+    <div class="card">
     <span class="badge" style="background:var(--success); color:white;">● TENDENCIA DEL DÍA</span>
     <div class="label">Pieza más Consultada (IA Vision)</div>
     
@@ -236,7 +253,36 @@
         options: { plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } }
     });
 
-    // 4. Animación de Afluencia
+    // 4. Gráfica de Satisfacción (Radar)
+new Chart(document.getElementById('chartSatisfaccion'), {
+    type: 'radar',
+    data: {
+        labels: ['Culturización', 'Accesibilidad', 'Tecnología', 'Conservación', 'Atención'],
+        datasets: [{
+            label: 'Calificación de Visitantes',
+            data: [95, 88, 98, 92, 90],
+            fill: true,
+            backgroundColor: 'rgba(52, 152, 219, 0.2)',
+            borderColor: '#3498db',
+            pointBackgroundColor: '#3498db',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: '#3498db'
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false } },
+        scales: {
+            r: {
+                angleLines: { display: false },
+                suggestedMin: 50,
+                suggestedMax: 100
+            }
+        }
+    }
+});
+
+    // 5. Animación de Afluencia
     window.onload = function() {
         const p = 68;
         const bar = document.getElementById('bar-afluencia');
