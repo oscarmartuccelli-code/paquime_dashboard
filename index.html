@@ -141,6 +141,15 @@
     </div>
 
     <div class="card">
+    <div class="label">Demografía: Origen de Visitantes</div>
+    <canvas id="chartNacionalidad" style="max-height: 200px !important;"></canvas>
+    
+    <div class="ai-insight">
+        <strong>Inteligencia de Mercado:</strong> Incremento del 15% en visitantes de <strong>Montana</strong> este mes. 
+    </div>
+</div>
+    
+    <div class="card">
         <div class="label">Contenido Generado por Usuario (UGC)</div>
         <div style="margin-top: 15px; text-align: center;">
             <span class="badge" style="background:var(--info); color:white; border:none; margin-bottom: 5px;">#PAQUIMÉ #LIFESTYLE #CULTURA (INSTAGRAM)</span>
@@ -240,7 +249,35 @@
         options: { plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { grid: { display: false } } } }
     });
 
-    // 3. Gráfica de Sentimiento (Dona)
+    // 3. Gráfica de Nacionalidades (Barras Horizontales)
+new Chart(document.getElementById('chartNacionalidad'), {
+    type: 'bar',
+    data: {
+        labels: ['México', 'EE.UU.', 'Canadá', 'Francia', 'Otros'],
+        datasets: [{
+            label: '% de Visitantes',
+            data: [55, 25, 10, 7, 3],
+            backgroundColor: [
+                '#27ae60', // México (Verde)
+                '#3498db', // EE.UU. (Azul)
+                '#e67e22', // Canadá (Naranja)
+                '#9b59b6', // Francia (Morado)
+                '#95a5a6'  // Otros (Gris)
+            ],
+            borderRadius: 5
+        }]
+    },
+    options: {
+        indexAxis: 'y', // Esto la hace horizontal
+        plugins: { legend: { display: false } },
+        scales: {
+            x: { beginAtZero: true, max: 100, grid: { display: false } },
+            y: { grid: { display: false } }
+        }
+    }
+});
+
+    // 4. Gráfica de Sentimiento (Dona)
     new Chart(document.getElementById('chartSentimiento'), {
         type: 'doughnut',
         data: {
@@ -253,7 +290,7 @@
         options: { plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } }
     });
 
-    // 4. Gráfica de Satisfacción (Radar)
+    // 5. Gráfica de Satisfacción (Radar)
 new Chart(document.getElementById('chartSatisfaccion'), {
     type: 'radar',
     data: {
@@ -282,7 +319,7 @@ new Chart(document.getElementById('chartSatisfaccion'), {
     }
 });
 
-    // 5. Animación de Afluencia
+    // 6. Animación de Afluencia
     window.onload = function() {
         const p = 68;
         const bar = document.getElementById('bar-afluencia');
